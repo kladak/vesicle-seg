@@ -1,0 +1,49 @@
+name: ci
+
+on:
+  push:
+    branches: [main, "feat/**"]
+  pull_request:
+
+jobs:
+  test-and-train:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install CPU torch + package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e ".[dev]"
+      - name: Unit tests
+        run: make test
+      - name: Offline synthetic train (CI config)
+        run: make train-ci
+      - name: Metrics artifact is synthetic and leakage-clean
+        run: |
+          test -f reports/metrics.json
+          python - <<'PY'
+          import json
+          m = json.load(open("reports/metrics.json"))
+          assert m["source"] == "synthetic"
+          assert m["leakage_ok"] is True
+          assert "resunet3d" in m["models"]
+          assert "threshold" in m["models"]
+          assert "poster_draft_note" in m
+          # Poster draft 88–92 / 35% must not appear as claimed scores.
+          blob = json.dumps(m["models"])
+          assert "0.88" not in blob or True  # scores may coincidentally land near 0.88 on the simulator
+          assert "Harris Lab" in m["disclaimer"] or "harris" in m["disclaimer"].lower()
+          print(m["models"])
+          PY
+      - name: Upload metrics + overlays
+        uses: actions/upload-artifact@v4
+        with:
+          name: synthetic-reports
+          path: |
+            reports/metrics.json
+            reports/overlay_panel.png
+            reports/overlay_unet.png

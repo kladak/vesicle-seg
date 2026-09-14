@@ -1,0 +1,78 @@
+{
+  "source": "synthetic",
+  "created_utc": "2026-09-14T01:27:51.160468+00:00",
+  "seed": 42,
+  "n_volumes": 6,
+  "shape": [
+    8,
+    64,
+    64
+  ],
+  "voxel_nm": [
+    40.0,
+    4.0,
+    4.0
+  ],
+  "chunk": [
+    8,
+    32,
+    32
+  ],
+  "overlap": [
+    0,
+    4,
+    4
+  ],
+  "epochs": 8,
+  "zarr": "data/synthetic.zarr",
+  "zarr_tree": "data/synthetic.zarr  (zarr group)\n  syn_000/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=18\n  syn_001/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=17\n  syn_002/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=22\n  syn_003/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=15\n  syn_004/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=13\n  syn_005/raw (8, 64, 64) chunks=(8, 32, 32) dtype=uint8\n    voxel_nm=[40.0, 4.0, 4.0] n_vesicles=19",
+  "split": {
+    "train": [
+      "syn_003",
+      "syn_002",
+      "syn_005"
+    ],
+    "val": [
+      "syn_004"
+    ],
+    "test": [
+      "syn_001",
+      "syn_000"
+    ]
+  },
+  "leakage_ok": true,
+  "poster_draft_note": "Poster draft figures (~88\u201392% accuracy, \u201c35% better than threshold\u201d) are unavailable without Harris Lab volumes and are not reconstructed here. Every score in this file comes from the in-repo synthetic generator.",
+  "disclaimer": "Educational research tooling. Not clinical imaging software. Not a Harris Lab data dump. Not an official lab release.",
+  "models": {
+    "threshold": {
+      "dice": 0.225605,
+      "iou": 0.131961,
+      "f1": 0.225605,
+      "precision": 0.438767,
+      "recall": 0.152204,
+      "pixel_acc": 0.960281,
+      "n_pred": 5.0,
+      "n_truth": 17.5,
+      "density_per_um3": 238.418579,
+      "gt_density_per_um3": 834.465027,
+      "density_abs_err": 596.046448,
+      "volume_um3": 0.020972
+    },
+    "resunet3d": {
+      "dice": 0.459727,
+      "iou": 0.304348,
+      "f1": 0.459727,
+      "precision": 0.980317,
+      "recall": 0.307329,
+      "pixel_acc": 0.972885,
+      "n_pred": 6.0,
+      "n_truth": 17.5,
+      "density_per_um3": 286.102295,
+      "gt_density_per_um3": 834.465027,
+      "density_abs_err": 548.362732,
+      "volume_um3": 0.020972
+    }
+  },
+  "demo_volume_id": "syn_001",
+  "weights": "artifacts/resunet3d.pt"
+}

@@ -1,0 +1,22 @@
+# Offline CI / demo — tiny synthetic volumes, CPU minutes.
+# Not Harris Lab data. Not the poster 88–92% experiment.
+seed: 42
+n_volumes: 6
+shape: [8, 64, 64]
+voxel_nm: [40.0, 4.0, 4.0]
+n_pools: 2
+vesicles_per_pool: [6, 11]
+n_mito: 1
+chunk: [8, 32, 32]
+overlap: [0, 4, 4]
+min_edge_frac: 0.35
+fractions: [0.50, 0.17, 0.33]
+epochs: 8
+batch_size: 2
+lr: 0.002
+base_channels: 8
+dropout: 0.10
+lambda_focal: 0.5
+zarr_path: data/synthetic.zarr
+reports_dir: reports
+artifacts_dir: artifacts

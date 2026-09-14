@@ -1,0 +1,21 @@
+# Larger local synthetic draw (still not lab data).
+seed: 42
+n_volumes: 10
+shape: [16, 96, 96]
+voxel_nm: [40.0, 4.0, 4.0]
+n_pools: 3
+vesicles_per_pool: [8, 16]
+n_mito: 2
+chunk: [8, 48, 48]
+overlap: [1, 8, 8]
+min_edge_frac: 0.35
+fractions: [0.70, 0.15, 0.15]
+epochs: 8
+batch_size: 2
+lr: 0.001
+base_channels: 8
+dropout: 0.10
+lambda_focal: 0.5
+zarr_path: data/synthetic.zarr
+reports_dir: reports
+artifacts_dir: artifacts

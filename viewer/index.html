@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>vesicle-seg — synthetic overlay viewer</title>
+  <style>
+    :root { font-family: ui-sans-serif, system-ui, sans-serif; color: #e8e6e3; background: #141414; }
+    body { max-width: 980px; margin: 32px auto; padding: 0 20px; }
+    h1 { font-size: 1.4rem; font-weight: 600; }
+    .banner { background: #3a2208; border: 1px solid #c47b22; padding: 12px 14px; border-radius: 8px; margin: 16px 0 24px; font-size: 0.92rem; }
+    figure { margin: 0 0 28px; }
+    img { width: 100%; border-radius: 6px; background: #000; }
+    figcaption { color: #9a9690; font-size: 0.85rem; margin-top: 6px; }
+    pre { background: #1e1e1e; padding: 12px; overflow: auto; border-radius: 6px; font-size: 12px; }
+    a { color: #8ec8ff; }
+  </style>
+</head>
+<body>
+  <h1>vesicle-seg overlay viewer</h1>
+  <div class="banner">
+    <strong>Educational / synthetic only.</strong>
+    Not Harris Lab EM. Not clinical imaging software.
+    Poster draft figures (~88–92%, “35% better than threshold”) are
+    <em>not</em> reconstructed here — open <code>reports/metrics.json</code> for
+    the scores this machine actually computed.
+  </div>
+  <figure>
+    <img src="../reports/overlay_panel.png" alt="raw / GT / threshold / U-Net panel" />
+    <figcaption>Mid-Z panel: synthetic EM, ground truth, threshold baseline, residual 3D U-Net.</figcaption>
+  </figure>
+  <figure>
+    <img src="../reports/overlay_unet.png" alt="U-Net overlay and density map" />
+    <figcaption>U-Net overlay + local density map (simulator occupancy, not a published bouton density).</figcaption>
+  </figure>
+  <p>Pipeline: raw → Zarr → adaptive overlapping chunks → residual 3D U-Net (Dice + focal) → stitch → density.</p>
+  <p>Serve from the repo root: <code>make serve</code> then open <a href="/viewer/">/viewer/</a>.</p>
+  <pre id="metrics">loading reports/metrics.json …</pre>
+  <script>
+    fetch("../reports/metrics.json")
+      .then((r) => r.json())
+      .then((m) => {
+        document.getElementById("metrics").textContent = JSON.stringify({
+          source: m.source,
+          leakage_ok: m.leakage_ok,
+          models: m.models,
+          poster_draft_note: m.poster_draft_note,
+        }, null, 2);
+      })
+      .catch(() => {
+        document.getElementById("metrics").textContent =
+          "metrics.json not found — run `make demo` first.";
+      });
+  </script>
+</body>
+</html>

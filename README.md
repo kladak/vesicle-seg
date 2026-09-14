@@ -2,7 +2,7 @@
 
 **Clean-room scientific ML — synaptic-vesicle segmentation on synthetic EM-like volumes.**
 
-Portfolio project for [Karim Ladak](https://github.com/kladak). Spec: [`SPEC.md`](SPEC.md).
+Spec: [`SPEC.md`](SPEC.md).
 
 ```text
 Raw EM-like volume → Zarr → adaptive overlapping chunks
@@ -25,7 +25,7 @@ See [`PROVENANCE.md`](PROVENANCE.md) for poster-context and citation notes.
 
 ## Demo script (60–90s)
 
-Cold start for a recruiter walkthrough or screen recording.
+Cold-start demo walkthrough (suitable for screen recording).
 
 ### 0. Once
 

@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vesicle-seg"
+version = "0.1.0"
+description = "Clean-room scientific ML — synthetic synaptic-vesicle segmentation in EM-like volumes (residual 3D U-Net, overlapping chunks, Dice/IoU/density)"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Karim Ladak", email = "ladakakarim@gmail.com" }]
+license = { text = "MIT" }
+dependencies = [
+  "numpy>=1.26",
+  "scipy>=1.12",
+  "matplotlib>=3.8",
+  "pyyaml>=6.0",
+  "pillow>=10.0",
+  "torch>=2.2",
+  "zarr>=2.18,<3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+serve = ["fastapi>=0.110", "uvicorn>=0.27"]
+
+[project.scripts]
+vesicle-seg = "vesicle_seg.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["vesicle_seg*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

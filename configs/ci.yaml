@@ -1,5 +1,5 @@
-# Offline CI / demo — tiny synthetic volumes, CPU minutes.
-# Not Harris Lab data. Not the poster 88–92% experiment.
+# Offline CI and demo config: tiny synthetic volumes, CPU minutes.
+# Synthetic volumes only; sized so a residual 3-D net fits in CPU CI.
 seed: 42
 n_volumes: 6
 shape: [8, 64, 64]

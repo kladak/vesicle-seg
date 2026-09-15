@@ -41,8 +41,6 @@
     ]
   },
   "leakage_ok": true,
-  "poster_draft_note": "Poster draft figures (~88\u201392% accuracy, \u201c35% better than threshold\u201d) are unavailable without Harris Lab volumes and are not reconstructed here. Every score in this file comes from the in-repo synthetic generator.",
-  "disclaimer": "Educational research tooling. Not clinical imaging software. Not a Harris Lab data dump. Not an official lab release.",
   "models": {
     "threshold": {
       "dice": 0.225605,
@@ -74,5 +72,6 @@
     }
   },
   "demo_volume_id": "syn_001",
-  "weights": "artifacts/resunet3d.pt"
+  "weights": "artifacts/resunet3d.pt",
+  "data_note": "Scores computed on volumes from the in-repo synthetic generator."
 }

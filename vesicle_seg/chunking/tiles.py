@@ -4,7 +4,7 @@ Halo is read for context and discarded on write so tile seams do not
 double-count. If the leftover edge would be a sliver, the last origin is
 snapped (and a redundant near-duplicate origin is dropped).
 
-Original planner — not a port of volara / daisy block scheduling.
+Written for this repository rather than ported from volara or daisy block scheduling.
 """
 
 from __future__ import annotations
@@ -35,7 +35,7 @@ def _axis_origins(length: int, chunk: int, overlap: int, min_edge_frac: float) -
     origins = list(range(0, length - chunk + 1, inner))
     last = length - chunk
     if origins[-1] != last:
-        # Adaptive: do not emit a tiny leftover tile — slide a full-size last tile.
+        # Adaptive: rather than emit a tiny leftover tile, slide a full-size last tile.
         # Keep intermediate origins so inner-write regions still abut (no seams/gaps).
         # Adaptive last tile: always a full-size window snapped to the end
         # (absorbs a sliver remainder as extra overlap, never a thin leftover tile).

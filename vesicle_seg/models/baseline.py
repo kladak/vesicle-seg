@@ -1,8 +1,8 @@
 """Threshold + morphology baseline.
 
-The poster draft's “35% better than threshold” figure is a lab claim and is
-not reconstructed here. This baseline exists so the synthetic U-Net has a
-floor to beat — or not — on the simulator.
+Exists so the U-Net has a floor to beat, or not, on the simulator. Reporting a
+segmentation model without a non-learned baseline hides how much of the score is
+just intensity thresholding.
 """
 
 from __future__ import annotations
@@ -38,7 +38,7 @@ def threshold_baseline(
     max_voxels: int = 400,
     opening: int = 1,
 ) -> np.ndarray:
-    """Dark-object threshold. Vesicles *and* membranes/mito fire — by design."""
+    """Dark-object threshold. Vesicles, membranes and mitochondria all fire, by design."""
     raw = np.asarray(raw)
     thr = otsu_threshold(raw)
     # Vesicles are dark; keep pixels below threshold.

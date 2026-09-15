@@ -87,7 +87,7 @@ def save_panel(
         ax.set_xticks([])
         ax.set_yticks([])
     fig.suptitle(
-        "Synthetic only — not Harris Lab EM. Poster 88-92% is not reconstructed.",
+        "Synthetic volumes",
         fontsize=9,
         y=1.04,
     )

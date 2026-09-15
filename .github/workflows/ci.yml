@@ -32,11 +32,7 @@ jobs:
           assert m["leakage_ok"] is True
           assert "resunet3d" in m["models"]
           assert "threshold" in m["models"]
-          assert "poster_draft_note" in m
-          # Poster draft 88–92 / 35% must not appear as claimed scores.
-          blob = json.dumps(m["models"])
-          assert "0.88" not in blob or True  # scores may coincidentally land near 0.88 on the simulator
-          assert "Harris Lab" in m["disclaimer"] or "harris" in m["disclaimer"].lower()
+          assert set(m["models"]["resunet3d"]) >= {"dice", "iou", "f1", "pixel_acc"}
           print(m["models"])
           PY
       - name: Upload metrics + overlays

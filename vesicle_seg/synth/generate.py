@@ -1,6 +1,6 @@
 """Deterministic synthetic ssEM-like volumes with ~40–60 nm vesicle blobs.
 
-Independent simulator. Not derived from Harris Lab volumes or annotations.
+Builds ssEM-like volumes from documented parameters; see PROVENANCE.md.
 Physical defaults are documented in SPEC.md (coarse ssEM-like anisotropy).
 """
 
@@ -54,7 +54,7 @@ def _unit(arr: np.ndarray) -> np.ndarray:
 
 
 def _membranes(rng: np.random.Generator, canvas: np.ndarray) -> None:
-    """Dark curved ridges — threshold bait, unlabeled."""
+    """Dark curved ridges: threshold bait, unlabeled."""
     d, h, w = canvas.shape
     n_ridges = max(2, int(round(h * w / 1800)))
     yy, xx = np.mgrid[0:h, 0:w]
@@ -103,7 +103,7 @@ def _paint_vesicle(
     mask = _ellipsoid_mask(canvas.shape, center, radii)
     if int(mask.sum()) < 4:
         return False
-    # Dark rim, slightly paler lumen — classic vesicle cue in the simulator.
+    # Dark rim with a slightly paler lumen, the simulator's vesicle cue.
     inner_r = tuple(0.62 * r for r in radii)
     inner = _ellipsoid_mask(canvas.shape, center, inner_r)
     rim = mask & ~inner
@@ -119,7 +119,7 @@ def _paint_mito(
     rng: np.random.Generator,
     shape: tuple[int, int, int],
 ) -> None:
-    """Unlabeled elongated dark oval — why a global threshold fails."""
+    """Unlabeled elongated dark oval: why a global threshold fails."""
     d, h, w = shape
     center = (
         float(rng.uniform(1, max(1.1, d - 1))),

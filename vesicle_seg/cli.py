@@ -37,7 +37,7 @@ def _cmd_generate(args: argparse.Namespace) -> None:
 def _cmd_train(args: argparse.Namespace) -> None:
     metrics = train_from_config(args.config)
     print(json.dumps({"leakage_ok": metrics["leakage_ok"], "models": metrics["models"]}, indent=2))
-    print(metrics["poster_draft_note"])
+    print(metrics["data_note"])
 
 
 def _cmd_infer(args: argparse.Namespace) -> None:
@@ -80,7 +80,7 @@ def _cmd_demo(args: argparse.Namespace) -> None:
     print("threshold", metrics["models"]["threshold"])
     print("resunet3d", metrics["models"]["resunet3d"])
     print()
-    print(metrics["poster_draft_note"])
+    print(metrics["data_note"])
     print("overlays: reports/overlay_panel.png  reports/overlay_unet.png")
     print("metrics:  reports/metrics.json")
 
@@ -94,7 +94,7 @@ def _cmd_serve(args: argparse.Namespace) -> None:
     os.chdir(root)
     httpd = ThreadingHTTPServer(("127.0.0.1", int(args.port)), handler)
     print(f"static viewer  http://127.0.0.1:{args.port}/viewer/")
-    print("Ctrl-C to stop. Educational overlays only.")
+    print("Ctrl-C to stop.")
     httpd.serve_forever()
 
 

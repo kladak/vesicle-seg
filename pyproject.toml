@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "vesicle-seg"
 version = "0.1.0"
-description = "Clean-room scientific ML — synthetic synaptic-vesicle segmentation in EM-like volumes (residual 3D U-Net, overlapping chunks, Dice/IoU/density)"
+description = "Synaptic-vesicle segmentation on synthetic EM-like volumes (residual 3D U-Net, overlapping chunks, Dice/IoU/density)"
 readme = "README.md"
 requires-python = ">=3.11"
 authors = [{ name = "Karim Ladak", email = "ladakakarim@gmail.com" }]

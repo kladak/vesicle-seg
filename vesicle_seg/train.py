@@ -23,11 +23,7 @@ from vesicle_seg.store.zarr_store import save_dataset, volume_tree
 from vesicle_seg.synth.generate import Volume, generate_dataset
 from vesicle_seg.viz import save_comparison, save_panel
 
-POSTER_NOTE = (
-    "Poster draft figures (~88–92% accuracy, “35% better than threshold”) are "
-    "unavailable without Harris Lab volumes and are not reconstructed here. "
-    "Every score in this file comes from the in-repo synthetic generator."
-)
+DATA_NOTE = "Scores computed on volumes from the in-repo synthetic generator."
 
 
 def _device() -> torch.device:
@@ -164,11 +160,7 @@ def run_experiment(cfg: dict[str, Any], out_dir: Path) -> dict[str, Any]:
         "zarr_tree": volume_tree(store),
         "split": {"train": split.train, "val": split.val, "test": split.test},
         "leakage_ok": bool(split.leakage_ok),
-        "poster_draft_note": POSTER_NOTE,
-        "disclaimer": (
-            "Educational research tooling. Not clinical imaging software. "
-            "Not a Harris Lab data dump. Not an official lab release."
-        ),
+        "data_note": DATA_NOTE,
         "models": {
             "threshold": {k: round(v, 6) for k, v in base_mean.items()},
             "resunet3d": {k: round(v, 6) for k, v in unet_mean.items()},

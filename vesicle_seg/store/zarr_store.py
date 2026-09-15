@@ -1,7 +1,6 @@
 """Zarr persistence for synthetic EM-like volumes.
 
-Original writer. Mentions of volara / missionEM_possible in SPEC.md are
-problem-shape citations only — no code was ported.
+Chunked, attribute-rich store so volumes can be read tile-by-tile at inference.
 """
 
 from __future__ import annotations
